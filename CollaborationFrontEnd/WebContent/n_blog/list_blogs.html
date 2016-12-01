@@ -1,0 +1,66 @@
+<!-- all-blog-view -->
+<div class="blogs">
+	<div class="container">
+		<div class="blog-all-grids">
+			<div ng-show="currentUser.role=='ADMIN'">
+				<div class="col-md-4 blogs-grid" ng-repeat="blog in ctrl.blogs"
+					ng-hide="blog.status=='R'">
+					<div class="blog-all">
+						<div class="blog-all-sub frame">
+							<h3>{{blog.title}}</h3>
+							<p>Written By : {{blog.userId}}</p>
+							<div class="more">
+								<input type="button" class="btn btn-info btn-more"
+									ng-click="ctrl.rejectBlog(blog, blog.id)"
+									ng-show="blog.status=='N'" value="Reject"
+									style="background: linear-gradient(to bottom right, #6f6f6f, #ef6b5e);"> 
+								<input	type="button" class="btn btn-info btn-more"
+									ng-click="ctrl.getSelectedBlog(blog.id)" value="Know More..">
+								<input type="button" class="btn btn-info btn-more"
+									ng-click="ctrl.approveBlog(blog, blog.id)"
+									ng-show="blog.status=='N'" value="Approve"
+									style="background: linear-gradient(to bottom right, #6f6f6f, #60d059);">
+							</div>
+						</div>
+						<div class="p-mask">
+							<h4>
+								<a><span><i class="fa fa-rss" aria-hidden="true"></i></span>{{blog.title}}</a>
+							</h4>
+							<ul>
+								<li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>5</a></li>
+								<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i>15</a></li>
+								<li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>5</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ng-hide="currentUser.role=='ADMIN'">
+				<div class="col-md-4 blogs-grid" ng-repeat="blog in ctrl.blogs"
+					ng-show="blog.status=='A'">
+					<div class="blog-all">
+						<div class="blog-all-sub frame">
+							<h3>{{blog.title}}</h3>
+							<p>Written By : {{blog.userId}}</p>
+							<div class="more">
+								<input type="button" class="btn btn-info btn-more"
+									ng-click="ctrl.getSelectedBlog(blog.id)" value="Know More..">
+							</div>
+						</div>
+						<div class="p-mask">
+							<h4>
+								<a><span>1.</span>{{blog.title}}</a>
+							</h4>
+							<ul>
+								<li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i> 5</a></li>
+								<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i> 15</a></li>
+								<li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i> 5</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>

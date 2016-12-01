@@ -1,0 +1,34 @@
+<div id="create-event">
+	<div class="container">
+		<div class="form-area">
+			<div class="row y-row">
+				<div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+					<fieldset>
+						<legend>Post Event</legend>
+						<div class="form-inner">
+							<form ng-submit="ctrl.submit()" name="myForm"
+								class="form-horizontal">
+								<div class="one">
+									<input type="text" required pattern=".{5,50}"
+										placeholder="Title of the Event..." ng-model="ctrl.event.name">
+								</div>
+								<div class="one">
+									<input type="text" required pattern=".{5,25}" 
+										placeholder="Event Location"  ng-model="ctrl.event.venue" >
+								</div>
+								<div class="one">
+									<textarea type="text" required pattern=".{50,2500}"
+										placeholder="Description of the Event..." ng-model="ctrl.event.description" ></textarea>
+								</div>
+								<div>
+									<input type="submit" class="btn btn-info kp-button floatright"
+										value="submit">
+								</div>
+							</form>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
