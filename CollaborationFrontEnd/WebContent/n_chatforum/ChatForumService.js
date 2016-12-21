@@ -1,102 +1,128 @@
 'use strict';
 
-app.factory('ForumService', ['$http', '$q', '$rootScope',
+app.factory('ChatChatForumService', ['$http', '$q', '$rootScope',
 		function($http, $q, $rootScope) {
-			console.log("ForumService...")
+			console.log("ChatForumService...")
 
-			var BASE_URL = 'http://localhost:8081/Binder'
+			var BASE_URL = 'http://localhost:8020/CollaborationBackEnd'
 				return {
 				
-				getSelectedForum : function(id) {
-					console.log("-->ForumService : calling getSelectedForum() method with id : " + id);
+				getSelectedChatChatForum : function(id) {
+					console.log("-->ChatChatForumService : calling getSelectedChatChatForum() method with id : " + id);
 					return $http
-								.get(BASE_URL+'/forum/'+ id)
+								.get(BASE_URL+'/chatforum/'+ id)
 								.then(function(response) {
-									$rootScope.selectedForum = response.data;
+									$rootScope.selectedChatForum = response.data;
 									return response.data;
 								},
 								function(errResponse) {
-									console.error('Error while Fetching Forum.');
+									console.error('Error while Fetching ChatForum.');
 									return $q.reject(errResponse);
 								});
 				},
 				
-				fetchAllForums : function() {
-					console.log("-->ForumService : calling 'fetchAllForums' method.");
+				fetchAllChatForums : function() {
+					console.log("-->ChatForumService : calling 'fetchAllChatForums' method.");
 					return $http
-								.get(BASE_URL + '/forums')
+								.get(BASE_URL + '/chatforums')
 								.then(function(response) {
 									return response.data;
 								}, 
 								function(errResponse) {
-									console.error('Error while fetching Forums');
+									console.error('Error while fetching ChatForums');
 									return $q.reject(errResponse);
 								});
 				},
 				
-				fetchAllForumComments : function(id) {
-					console.log("-->ForumService : calling 'fetchAllForumComments' method for id : " + id);
+				fetchAllChatForumComments : function(id) {
+					console.log("-->ChatForumService : calling 'fetchAllChatForumComments' method for id : " + id);
 					return $http
-								.get(BASE_URL + '/forumComments/'+id)
+								.get(BASE_URL + '/chatforumComments/'+id)
 								.then(function(response) {
-									$rootScope.selectedForumComments = response.data;
+									$rootScope.selectedChatForumComments = response.data;
 									
 									return response.data;
 								}, 
 								function(errResponse) {
-									console.error('Error while fetching ForumComments');
+									console.error('Error while fetching ChatForumComments');
 									return $q.reject(errResponse);
 								});
 				},
 
-				createForum : function(forum) {
-					console.log("-->ForumService : calling 'createForum' method.");
+				createChatForum : function(chatforum) {
+					console.log("-->ChatChatForumService : calling 'createChatForum' method.");
 					return $http
-								.post(BASE_URL + '/forum/', forum)
+								.post(BASE_URL + '/chatforum/', chatforum)
 								.then(function(response) {
 									return response.data;
 								}, 
 								function(errResponse) {
-									console.error('Error while creating forum');
+									console.error('Error while creating chatforum');
 									return $q.reject(errResponse);
 								});
 				},
 				
-				createForumComment : function(forumComment) {
-					console.log("-->ForumService : calling 'createForumComment' method.");
+				createChatForumComment : function(chatforumComment) {
+					console.log("-->ChatForumService : calling 'createChatForumComment' method.");
 					return $http
-								.post(BASE_URL + '/forumComment/', forumComment)
+								.post(BASE_URL + '/chatforumComment/', chatforumComment)
 								.then(function(response) {
 									return response.data;
 								}, 
 								function(errResponse) {
-									console.error('Error while creating forumComment');
+									console.error('Error while creating chatforumComment');
 									return $q.reject(errResponse);
 								});
 				},
 				
-				updateForum : function(forum, id) {
-					console.log("-->ForumService : calling 'updateForum' method with id : "+id);
+				updateChatForum : function(chatforum, id) {
+					console.log("-->ChatChatForumService : calling 'updateChatForum' method with id : "+id);
 					return $http
-								.put(BASE_URL+'/forum/'+id)
+								.put(BASE_URL+'/chatforum/'+id)
 								.then(function(response) {
 									return response.data;
 								},
 								function(errResponse) {
-									console.error('Error while updating Forum');
+									console.error('Error while updating ChatForum');
 									return $q.reject(errResponse);
 								});
 				},
 				
-				deleteForum : function(id) {
-					console.log("-->ForumService : calling 'deleteForum' method with id : "+id);
+				deleteChatForum : function(id) {
+					console.log("-->ChatChatForumService : calling 'deleteChatForum' method with id : "+id);
 					return $http
-								.delete(BASE_URL+'/forum/'+id)
+								.delete(BASE_URL+'/chatforum/'+id)
 								.then(function(response) {
 									return response.data;
 								},
 								function(errResponse) {
-									console.log('Error while deleting Forum');
+									console.log('Error while deleting ChatForum');
+									return $q.reject(errResponse);
+								});
+				},
+				
+				likeChatForum : function(chatforum, id) {
+					console.log("-->ChatChatForumService : calling 'likeChatForum' method : getting chatforum with id : " + id);
+					return $http
+								.put(BASE_URL+'/chatforum/likeChatForum/'+id, chatforum)
+								.then(function(response) {
+									return response.data;
+								},
+								function(errResponse) {
+									console.log("Error while liking ChatForum.");
+									return $q.reject(errResponse);
+								});
+				},
+				
+				countComment : function(chatforum, id) {
+					console.log("-->ChatChatForumService : calling 'countComment' method : getting chatforum with id : " + id);
+					return $http
+								.put(BASE_URL+'/chatforum/countComment/'+id, chatforum)
+								.then(function(response) {
+									return response.data;
+								},
+								function(errResponse) {
+									console.log("Error while liking ChatForum.");
 									return $q.reject(errResponse);
 								});
 				}

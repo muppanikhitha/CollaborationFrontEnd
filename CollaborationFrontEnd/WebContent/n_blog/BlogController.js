@@ -17,9 +17,11 @@ app.controller('BlogController', [
 				post_date : '',
 				userId : '',
 				status : '',
-				errorCode : '',
-				errorMessage : ''
+				countLike : '',
+				errCode : '',
+				errMessage : ''
 			}
+
 			self.blogs = [];
 
 			self.getSelectedBlog = function(id) {
@@ -42,6 +44,7 @@ app.controller('BlogController', [
 						}, function(errResponse) {
 							console.error('Error while fetching Blogs...');
 						});
+						
 			};
 			
 			self.createBlog = function(blog) {
@@ -135,8 +138,8 @@ app.controller('BlogController', [
 					post_date : '',
 					userId : '',
 					status : '',
-					errorCode : '',
-					errorMessage : ''
+					errCode : '',
+					errMessage : ''
 				};
 				$scope.myForm.$setPristine(); // reset form...
 			};

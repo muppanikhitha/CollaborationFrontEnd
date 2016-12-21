@@ -1,3 +1,4 @@
+
 (function(angular, SockJS, Stomp) {
   app.service("ChatService", function($q, $timeout) {
     
@@ -7,7 +8,7 @@
     }, messageIds = [];
     
     service.RECONNECT_TIMEOUT = 30000;
-    service.SOCKET_URL = "/Binder/chat";
+    service.SOCKET_URL = "/CollaborationFrontEnd/chat";
     service.CHAT_TOPIC = "/topic/message";
     service.CHAT_BROKER = "/app/chat";
     
@@ -48,7 +49,7 @@
     };
     
     var initialize = function() {
-    	socket.client = new SockJS('/Binder/chat');
+    	socket.client = new SockJS('/CollaborationFrontEnd/chat');
     	socket.stomp = Stomp.over(socket.client);
     	socket.stomp.connect({}, startListener);
     	socket.stomp.onclose = reconnect;

@@ -1,25 +1,28 @@
+
 'use strict';
 
-app.controller('ForumController', [
+app.controller('ChatForumController', [
 		'$scope',
-		'ForumService',
+		'ChatForumService',
 		'$location',
 		'$rootScope',
 		function($scope, ForumService, $location, $rootScope) {
-			console.log("ForumController...")
+			console.log("ChatForumController...")
 
 			var self = this;
-			self.forum = {
+			self.chatforum = {
 				id : '',
 				description : '',
 				post_date : '',
 				userId : '',
 				errorCode : '',
-				errorMessage : ''
+				errorMessage : '',
+				countLike : '',
+			    countComment : ''
 			}
-			self.forums = [];
+			self.chatforums = [];
 			
-			self.forumComment = {
+			self.chatforumComment = {
 				id : '',
 				forumId : '',
 				comment : '',
@@ -28,12 +31,12 @@ app.controller('ForumController', [
 				errorCode : '',
 				errorMessage : ''
 			}			
-			self.forumComments = [];
+			self.chatforumComments = [];
 
-			self.getSelectedForum = function(id) {
-				console.log("-->ForumController : calling getSelectedForum method with id : " + id);
-				ForumService.getSelectedForum(id).then(function(d) {
-					self.forum = d;
+			self.getSelectedChatForum = function(id) {
+				console.log("-->ChatForumController : calling getSelectedForum method with id : " + id);
+				ChatForumService.getSelectedChatForum(id).then(function(d) {
+					self.chatforum = d;
 					
 					console.log("test  "+d);
 					//$location.path('/view_forum');
@@ -42,10 +45,10 @@ app.controller('ForumController', [
 				});
 			};
 
-			self.fetchAllForums = function() {
-				console.log("-->ForumController : calling fetchAllForums method.");
-				ForumService.fetchAllForums().then(function(d) {
-					self.forums = d;
+			self.fetchAllChatForums = function() {
+				console.log("-->ChatForumController : calling fetchAllForums method.");
+				ChatForumService.fetchAllChatForums().then(function(d) {
+					self.chatforums = d;
 				}, function(errResponse) {
 					console.error('Error while fetching Forums...');
 				});
@@ -53,88 +56,99 @@ app.controller('ForumController', [
 			
 			self.fetchAllForums();
 			
-			self.fetchAllForumComments = function(id) {
-				console.log("-->ForumController : calling fetchAllForumComments method with id : "+ id);
-				ForumService.fetchAllForumComments(id).then(function(d) {
-					self.forumComments = d;
+			self.fetchAllChatForumComments = function(id) {
+				console.log("-->ChatForumController : calling fetchAllForumComments method with id : "+ id);
+				ChatForumService.fetchAllChatForumComments(id).then(function(d) {
+					self.chatforumComments = d;
 					
-					self.getSelectedForum(id);		//calling getSelectedForum(id) method ...
-					$location.path('/view_forum');
+					self.getSelectedChatForum(id);		//calling getSelectedForum(id) method ...
+					$location.path('/view_chatforum');
 				}, function(errResponse) {
-					console.error('Error while fetching ForumComments...');
+					console.error('Error while fetching ChatForumComments...');
 				});
 			};
 
-			self.createForum = function(forum) {
-				console.log("-->ForumController : calling createForum method.");
-				ForumService.createForum(forum).then(function(d) {
-					self.forum = d;
-					alert('Forum Created Successfully...')
+			self.createChatForum = function(Chatforum) {
+				console.log("-->ChatForumController : calling createForum method.");
+				ChatForumService.createForum(forum).then(function(d) {
+					self.chatforum = d;
+					alert('ChatForum Created Successfully...')
 				},
 						function(errResponse) {
-							console.error('Error while creating forum...');
+							console.error('Error while creating chatforum...');
 						});
 			};
 			
-			self.createForumComment = function(forumComment, id) {
-				console.log("-->ForumController : calling 'createForumComment' method.", self.forum);
-				forumComment.forumId = id;
-				console.log("-->ForumController ForumId :" +forumComment.forumId);
-				//forumComment.forumId = id;
+			self.createChatForumComment = function(ChatforumComment, id) {
+				console.log("-->ChatForumController : calling 'createForumComment' method.", self.forum);
+				chatforumComment.chatforumId = id;
+				console.log("-->ChatForumController ForumId :" +chatforumComment.chatforumId);
 				ForumService
-							.createForumComment(forumComment)
+							.createChatForumComment(ChatforumComment)
 							.then(function(d) {
-								self.forumComment = d;
-								console.log('-->ForumController :', self.forumComment)
-								self.fetchAllForumComments(id);
+								self.chatforumComment = d;
+								console.log('-->ChatForumController :', self.chatforumComment)
+								self.fetchAllChatForumComments(id);
 								self.resetComment();
 							},
 							function(errResponse) {
-								console.error('Error while creating forumComment...');
+								console.error('Error while creating chatforumComment...');
 							});
 			};
 
-			self.updateForum = function(forum, id) {
-				console.log("-->ForumController : calling updateForum method.");
-				ForumService.updateForum(forum).then(self.fetchAllForums,
+			self.updateChatForum = function(Chatforum, id) {
+				console.log("-->ChatForumController : calling updateForum method.");
+				ChatForumService.updateChatForum(chatforum).then(self.fetchAllChatForums,
 						function(errResponse) {
-							console.error('Error while updating forum...')
+							console.error('Error while updating chatforum...')
 						});
 			};
 
-			self.deleteForum = function(id) {
-				console.log("-->ForumController : calling deleteForum method.");
-				ForumService.deleteForum(id).then(self.fetchAllForums,
+			self.deleteChatForum = function(id) {
+				console.log("-->ChatForumController : calling deleteForum method.");
+				ChatForumService.deleteChatForum(id).then(self.fetchAllChatForums,
 						function(errResponse) {
-							console.error('Error while deleting forum...')
+							console.error('Error while deleting chatforum...')
 						});
 			};
+			
+			self.likeChatForum = function(Chatforum, id) {
+				console.log("-->ChatForumController : calling likeChatForum() method. ChatForum id is : "+id);
+				console.log("-->ChatForumController", self.chatforum);
+				ChatForumService.likeChatForum(Chatforum, id).then(
+						self.fetchAllForums,
+						function(errResponse) {
+							console.error("Error while liking the chatforum...");
+						});
+			};
+			
+			self.countComment = function(chatforum, id) {
+				console.log("-->ChatForumController : calling countComment() method. ChatForum id is : "+id);
+				console.log("-->ChatForumController", self.Chatforum);
+				ChatForumService.countComment(Chatforum, id).then(
+						self.fetchAllChatForums,
+						function(errResponse) {
+							console.error("Error while commenting on a chatforum...");
+						});
+			};
+			
 
 	/*****************************************************************************/
 			
 			self.submit = function() {
 				{
-					console.log("-->ForumController : calling submit() method.", self.forum);
-					self.createForum(self.forum);
-					console.log('Saving new Forum', self.forum);
+					console.log("-->ChatForumController : calling submit() method.", self.chatforum);
+					self.createChatForum(self.chatforum);
+					console.log('Saving new ChatForum', self.chatforum);
 				}
 				self.reset();
 			};
 			
-			self.comment = function() {
-				{
-					console.log("-->ForumController : calling comment() method.", self.forum);
-					self.createForumComment(self.forum);
-					console.log("Saving new Comment", self.forumComment);
-				}
-				self.resetComment();
-			};
-
 			self.edit = function(id) {
 				console.log('id to be edited', id);
-				for (var i = 0; i < self.forums.length; i++) {
-					if (self.forums[i].id === id) {
-						self.forum = angular.copy(self.forums[i]);
+				for (var i = 0; i < self.chatforums.length; i++) {
+					if (self.chatforums[i].id === id) {
+						self.chatforum = angular.copy(self.chatforums[i]);
 						break;
 					}
 				}
@@ -142,15 +156,15 @@ app.controller('ForumController', [
 			
 			self.remove = function(id) {
 				console.log('id to be deleted', id);
-				if (self.forum.id === id) {
+				if (self.chatforum.id === id) {
 					self.reset();
 				}
-				self.deleteForum(id);
+				self.deleteChatForum(id);
 			};
 
 			self.reset = function() {
-				console.log('submit a new Forum', self.forum);
-				self.forum = {
+				console.log('submit a new ChatForum', self.chatforum);
+				self.chatforum = {
 						id : '',
 						description : '',
 						post_date : '',
@@ -158,20 +172,20 @@ app.controller('ForumController', [
 						errorCode : '',
 						errorMessage : ''
 				};
-				$scope.myForm.$setPristine(); // reset form...
+				$scope.myChatForm.$setPristine(); // reset form...
 			};
 			
 			self.resetComment = function() {
-				console.log('submit a new ForumComment', self.forumComment);
-				self.forumComment = {
+				console.log('submit a new ChatForumComment', self.ChatforumComment);
+				self.ChatforumComment = {
 						id : '',
-						forumId : '',
+						chatforumId : '',
 						comment : '',
 						userId : '',
 						commentDate : '',
 						errorCode : '',
 						errorMessage : ''
 					};
-				$scope.myForm.$setPristine(); // reset form...
+				$scope.myChatForm.$setPristine(); // reset form...
 			};
 		} ]);

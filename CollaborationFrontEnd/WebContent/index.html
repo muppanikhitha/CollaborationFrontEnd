@@ -3,9 +3,9 @@
 
 <head>
 <meta charset="UTF-8">
-<title> - A Collaboration site for NIIT</title>
-<!-- <link rel="icon" href="resources/img/binder.png">
- -->
+<title> Collaboration-Website </title>
+<!-- <link rel="icon" href="resources/img/binder.png"> -->
+
 <!-- Bootstrap, Font Awesome and jQuery css -->
 <link href="resources/css/font-awesome.css" rel="stylesheet">
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -17,6 +17,8 @@
 
 
 <body>
+<!-- <h1 style="text-align:center;">NIIT Collaboration</h1>
+ -->
 	<!-- ---------------------- navbar start -------------------------->
 	<div class="container navigation"  ng-controller="UserController as ctrl">
 		<nav class="navbar navbar-default navbar-fixed-top">
@@ -28,9 +30,9 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<div class="logo">
+				<!-- <div class="logo">
 					<a class="navbar-brand" href="#/"></a>
-				</div>
+				</div> -->
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -42,8 +44,8 @@
 						
 						<!-- <<<<<<<<<< Job >>>>>>>>>> -->
 						
-						<li ng-show="currentUser==''"><a href="#/search_job" class="a-hover"><span>Job</span></a></li>
-						
+<!-- 						<li ng-show="currentUser==''"><a href="#/search_job" class="a-hover"><span>Job</span></a></li>
+ -->						
 						<li ng-hide="currentUser==''">
 							<a class="dropdown-toggle a-hover" data-toggle="dropdown">Job<span class="caret"></span></a>
 							<ul class="dropdown-menu">
@@ -55,13 +57,13 @@
 											
 						<!-- <<<<<<<<<< Event >>>>>>>>>> -->
 						
-						<li ng-show="currentUser==''"><a href="#/list_event" class="a-hover"><span>Event</span></a></li>
+<!-- 						<li ng-show="currentUser==''"><a href="#/list_event" class="a-hover"><span>Event</span></a></li>
 						
 						<li ng-show="currentUser.role=='STUDENT'"><a href="#/list_event" class="a-hover"><span>Event</span></a></li>
 						<li ng-show="currentUser.role=='EMPLOYEE'"><a href="#/list_event" class="a-hover"><span>Event</span></a></li>
 						<li ng-show="currentUser.role=='ALUMNI'"><a href="#/list_event" class="a-hover"><span>Event</span></a></li>
-						<li ng-show="currentUser.role=='ADMIN'">
-							<a class="dropdown-toggle a-hover" data-toggle="dropdown" >Event<span class="caret"></span></a>
+ -->						<li ng-show="currentUser.role=='ADMIN'">
+ 						<a class="dropdown-toggle a-hover" data-toggle="dropdown" >Event<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="#/create_event"><span>Post Event</span></a></li>
 								<li><a href="#/list_event"><span>Show All Events</span></a></li>
@@ -70,8 +72,8 @@
 						
 						<!-- <<<<<<<<<< Blog >>>>>>>>>> -->
 						
-						<li ng-show="currentUser==''"><a href="#/list_blog" class="a-hover"><span>Blog</span></a></li>
-						
+<!-- 						<li ng-show="currentUser==''"><a href="#/list_blog" class="a-hover"><span>Blog</span></a></li>
+ -->						
 						<li ng-hide="currentUser==''"><a class="dropdown-toggle a-hover" data-toggle="dropdown">Blog
 							<span class="caret"></span></a>
 							<ul class="dropdown-menu">
@@ -82,13 +84,13 @@
 						
 						<!-- <<<<<<<<<< Forum >>>>>>>>>> -->
 						
-						<li ng-show="currentUser==''"><a href="#/list_forum" class="a-hover"><span>Forum</span></a></li>
-						
-						<li ng-hide="currentUser==''"><a class="dropdown-toggle a-hover" data-toggle="dropdown">Forum<span
+<!-- 						<li ng-show="currentUser==''"><a href="#/list_chatforum" class="a-hover"><span>ChatForum</span></a></li>
+ -->						
+						<li ng-hide="currentUser==''"><a class="dropdown-toggle a-hover" data-toggle="dropdown">ChatForum<span
 								class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="#/create_forum"><span>Add New Forum</span></a></li>
-								<li><a href="#/list_forum"><span>Show All Forums</span></a></li>
+								<li><a href="#/create_chatforum"><span>Add New ChatForum</span></a></li>
+								<li><a href="#/list_chatforum"><span>Show All ChatForums</span></a></li>
 							</ul>
 						</li>
 						
@@ -118,7 +120,7 @@
 						
 						<li class="floatright" ng-show="currentUser==''"><a class="dropdown-toggle a-hover" data-toggle="dropdown" >Sign In<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="#/login"><span><i class="fa fa-sign-in" aria-hidden="true" style="font-size: x-large;"></i></span></a></li>
+								<li><a href="#/login"><span>Sign In</span></a></li>
 								<li><a href="#/register"><span>Sign Up</span></a></li>
 							</ul>
 						</li>
@@ -146,15 +148,13 @@
 			<div class="footer-bottom">
 				<div class="footer-bottom-left">
 					<p>
-						@2016. <a href="#/">Binder.</a>Copyright by niitstudent_sovanjana NIIT Ltd.
+						@2016. <a href="#/">		NIIT Collaboration.</a>Copyright by niitstudent_Nikhitha NIIT Ltd.
 					</p>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- ---------------------- /footer end ------------------------->
-
-
 	<script src="resources/js/sockjs-0.3.4.js"></script>
 	<script src="resources/js/stomp.js"></script>
 	
@@ -198,10 +198,6 @@
 	<!-- chat related js files -->
 	<script src="b_chat/ChatController.js"></script>
 	<script src="b_chat/ChatService.js"></script>
-
-	<!-- about related js files -->
-	<script src="b_about/AboutController.js"></script>
-	<script src="b_about/AboutService.js"></script>
 
 </body>
 </html>

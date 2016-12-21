@@ -3,18 +3,18 @@
 		<div class="form-area">
 			<div class="row y-row">
 				<div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-					<div ng-show='ctrl.forum.errorMessage!=""'>
+					<div ng-show='ctrl.chatforum.errorMessage!=""'>
 						<div class="alart alart-danger fade in">Error :
-							{{ctrl.forum.errorMessage}}</div>
+							{{ctrl.chatforum.errorMessage}}</div>
 					</div>
 					<fieldset>
-						<legend>Create Forum</legend>
+						<legend>Create ChatForum</legend>
 						<div class="form-inner">
 							<form ng-submit="ctrl.submit()" name="myForm"
 								class="form-horizontal">
 								<div class="one">
 									<textarea type="text" name="content" required pattern=".{50,2500}" rows="5"
-										placeholder="Content of the Blog..." ng-model="ctrl.forum.description" ></textarea>
+										placeholder="Content of the Blog..." ng-model="ctrl.chatforum.description" ></textarea>
 								</div>
 								<div>
 									<input type="submit" class="btn btn-info kp-button floatright"
